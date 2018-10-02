@@ -39,6 +39,7 @@ the results. Explain the differences you have observed on the three neural netwo
 ## Task III - Techniques for Improving Generalization
 For this task, you need to do the required analysis and apply the following regularization techniques with the
 goal to improve the performance on the 2007 samples in zip_test.txt.
+
 (1) Use an ensemble to improve the generalization performance. Here you need to use bagging of at least
 six neural networks to improve the performance of the individual neural networks. You need to analyze
 your results.
