@@ -9,38 +9,53 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 
 def load_data():
-	f = open('zip_train.txt')
 
-	tempLabels = []
-	tempData = []
-
-	for line in f:
-		line = line.split()
-		thelabel = line.pop(0)
-		thelabel = int(float((thelabel)))
-
-		line = [float(i) for i in line]
-		theX = np.interp(line, (-1,1), (0, 1))
-
-		tempLabels.append(thelabel)
-		tempData.append(theX)
+	trainData = []
+	trainLabels = []
+	testData = []
+	testLabels = []
 
 	classes = [0,1,2,3,4,5,6,7,8,9]
 	label_encoder = pd.factorize(classes)
-	encoder = OneHotEncoder()
-	labels_1hot = encoder.fit_transform(label_encoder[0].reshape(-1,1))
+	labels_1hot = OneHotEncoder().fit_transform(label_encoder[0].reshape(-1,1))
 	onehot_array = labels_1hot.toarray()
 
 	d1 = dict(zip(classes,onehot_array.tolist()))
-	trainLabels = []
-	for aminoacid in tempLabels:
-	    encoding = d1[aminoacid]
-	    trainLabels.append(encoding)
 
-	trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
-	trainData = np.array(tempData)
+	for i,file in enumerate(['zip_train.txt', 'zip_test.txt']):
+		f = open(file)
 
-	return trainData, trainLabels
+		tempLabels = []
+		tempData = []
+
+		for line in f:
+			line = line.split()
+			thelabel = line.pop(0)
+			thelabel = int(float((thelabel)))
+
+			line = [float(i) for i in line]
+			theX = np.interp(line, (-1,1), (0, 1))
+
+			tempLabels.append(thelabel)
+			tempData.append(theX)
+
+		for aminoacid in tempLabels:
+		    encoding = d1[aminoacid]
+		    if i == 0:
+		    	trainLabels.append(encoding)
+		    else:
+		    	testLabels.append(encoding)
+
+		if i == 0:
+			trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
+			trainData = np.array(tempData)
+		else:
+			testLabels = np.array(testLabels).reshape((-1,len(classes)))
+			testData = np.array(tempData)
+
+		f.close()
+
+	return trainData, trainLabels, testData, testLabels
 
 def plot_results(history, epochs):
 	plt.style.use("ggplot")
@@ -57,7 +72,7 @@ def plot_results(history, epochs):
 
 if __name__ == "__main__":
 
-	trainData, trainLabels = load_data()
+	trainData, trainLabels, testData, testLabels = load_data()
 
 	batch_size = 128
 	num_classes = 10
@@ -80,9 +95,9 @@ if __name__ == "__main__":
 	                    batch_size=batch_size,
 	                    epochs=epochs,
 	                    verbose=1,
-	                    validation_split=0.2)
+	                    validation_data=(testData,testLabels))
 
-	score = model.evaluate(trainData, trainLabels, verbose=0)
+	score = model.evaluate(testData, testLabels, verbose=0)
 	print('Test loss:', score[0])
 	print('Test accuracy:', score[1])
 
