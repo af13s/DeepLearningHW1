@@ -8,82 +8,82 @@ from keras.optimizers import Adam
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 
-f = open('zip_train.txt')
+def load_data():
+	f = open('zip_train.txt')
 
-trainLabels = []
-trainData = []
+	trainLabelss = []
+	trainData = []
 
-for line in f:
-	line = line.split()
-	thelabel = line.pop(0)
-	thelabel = int(float((thelabel)))
+	for line in f:
+		line = line.split()
+		thelabel = line.pop(0)
+		thelabel = int(float((thelabel)))
 
-	line = [float(i) for i in line]
-	theX = np.interp(line, (-1,1), (0, 1))
+		line = [float(i) for i in line]
+		theX = np.interp(line, (-1,1), (0, 1))
 
-	trainLabels.append(thelabel)
-	trainData.append(theX)
+		trainLabelss.append(thelabel)
+		trainData.append(theX)
 
-	# For visualization
-	# pixels = theX.reshape((16, 16))
+	classes = [0,1,2,3,4,5,6,7,8,9]
+	label_encoder = pd.factorize(classes)
+	encoder = OneHotEncoder()
+	labels_1hot = encoder.fit_transform(label_encoder[0].reshape(-1,1))
+	onehot_array = labels_1hot.toarray()
 
-	# plt.title('Label is {thelabel}'.format(thelabel=thelabel))
-	# plt.imshow(pixels, cmap='gray')
-	# plt.show()
+	d1 = dict(zip(classes,onehot_array.tolist()))
+	trainLabels = []
+	for aminoacid in trainLabelss:
+	    encoding = d1[aminoacid]
+	    trainLabels.append(encoding)
 
-classes = [0,1,2,3,4,5,6,7,8,9]
-label_encoder = pd.factorize(classes)
-encoder = OneHotEncoder()
-labels_1hot = encoder.fit_transform(label_encoder[0].reshape(-1,1))
-onehot_array = labels_1hot.toarray()
+	trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
+	trainData = np.array(trainData)
 
-d1 = dict(zip(classes,onehot_array.tolist()))
-theFinalLabels = []
-for aminoacid in trainLabels:
-    encoding = d1[aminoacid]
-    theFinalLabels.append(encoding)
+	return trainData, trainLabels
 
-nicelabels = np.array(theFinalLabels)
-nicelabels = nicelabels.reshape((-1,len(classes)))
+def plot_results(history, epochs):
+	plt.style.use("ggplot")
+	plt.figure()
+	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+	plt.title("Training Loss and Accuracy")
+	plt.xlabel("Epoch #")
+	plt.ylabel("Loss/Accuracy")
+	plt.legend(loc="upper left")
+	plt.show()
 
-model = Sequential()
-model.add(Dense(167, activation='relu', input_shape=(256,)))
-model.add(Dropout(0.2))
-model.add(Dense(167, activation='relu'))
-model.add(Dropout(0.2))
-model.add(Dense(10, activation='softmax'))
+if __name__ == "__main__":
 
-model.summary()
+	trainData, trainLabels = load_data()
 
-batch_size = 128
-num_classes = 10
-epochs = 20
+	batch_size = 128
+	num_classes = 10
+	epochs = 20
 
-trainData = np.array(trainData)
+	model = Sequential()
+	model.add(Dense(167, activation='relu', input_shape=(256,)))
+	model.add(Dropout(0.2))
+	model.add(Dense(167, activation='relu'))
+	model.add(Dropout(0.2))
+	model.add(Dense(num_classes, activation='softmax'))
 
-model.compile(loss='categorical_crossentropy',
-              optimizer=Adam(lr=0.001),
-              metrics=['accuracy'])
+	model.summary()
 
-history = model.fit(trainData, nicelabels,
-                    batch_size=batch_size,
-                    epochs=epochs,
-                    verbose=1,
-                    validation_split=0.2)
+	model.compile(loss='categorical_crossentropy',
+	              optimizer=Adam(lr=0.001),
+	              metrics=['accuracy'])
 
-score = model.evaluate(trainData, nicelabels, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+	history = model.fit(trainData, trainLabels,
+	                    batch_size=batch_size,
+	                    epochs=epochs,
+	                    verbose=1,
+	                    validation_split=0.2)
 
-plt.style.use("ggplot")
-plt.figure()
-N = epochs
-plt.plot(np.arange(0, N), history.history["loss"], label="train_loss")
-plt.plot(np.arange(0, N), history.history["val_loss"], label="val_loss")
-plt.plot(np.arange(0, N), history.history["acc"], label="train_acc")
-plt.plot(np.arange(0, N), history.history["val_acc"], label="val_acc")
-plt.title("Training Loss and Accuracy")
-plt.xlabel("Epoch #")
-plt.ylabel("Loss/Accuracy")
-plt.legend(loc="upper left")
-plt.show()
+	score = model.evaluate(trainData, trainLabels, verbose=0)
+	print('Test loss:', score[0])
+	print('Test accuracy:', score[1])
+
+	plot_results(history,epochs)
