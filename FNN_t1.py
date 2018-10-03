@@ -11,8 +11,8 @@ import pandas as pd
 def load_data():
 	f = open('zip_train.txt')
 
-	trainLabelss = []
-	trainData = []
+	tempLabels = []
+	tempData = []
 
 	for line in f:
 		line = line.split()
@@ -22,8 +22,8 @@ def load_data():
 		line = [float(i) for i in line]
 		theX = np.interp(line, (-1,1), (0, 1))
 
-		trainLabelss.append(thelabel)
-		trainData.append(theX)
+		tempLabels.append(thelabel)
+		tempData.append(theX)
 
 	classes = [0,1,2,3,4,5,6,7,8,9]
 	label_encoder = pd.factorize(classes)
@@ -33,12 +33,12 @@ def load_data():
 
 	d1 = dict(zip(classes,onehot_array.tolist()))
 	trainLabels = []
-	for aminoacid in trainLabelss:
+	for aminoacid in tempLabels:
 	    encoding = d1[aminoacid]
 	    trainLabels.append(encoding)
 
 	trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
-	trainData = np.array(trainData)
+	trainData = np.array(tempData)
 
 	return trainData, trainLabels
 
