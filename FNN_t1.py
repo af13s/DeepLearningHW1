@@ -39,8 +39,8 @@ def load_data():
 			tempLabels.append(thelabel)
 			tempData.append(theX)
 
-		for aminoacid in tempLabels:
-		    encoding = d1[aminoacid]
+		for label in tempLabels:
+		    encoding = d1[label]
 		    if i == 0:
 		    	trainLabels.append(encoding)
 		    else:
