@@ -6,16 +6,15 @@ Gets to 99.25% test accuracy after 12 epochs
 16 seconds per epoch on a GRID K520 GPU.
 '''
 
-from __future__ import print_function
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-from keras import backend as K
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
+from keras.optimizers import Adam
 
 batch_size = 32
 num_classes = 10
@@ -83,7 +82,7 @@ input_shape = (img_rows, img_cols, 1)
 
 
 model = Sequential()
-model.add(Conv2D(64, kernel_size=(3, 3),
+model.add(Conv2D(32, kernel_size=(3, 3),
                  activation='relu',
                  input_shape=input_shape))
 model.add(Conv2D(64, (3, 3), activation='tanh'))
@@ -94,8 +93,8 @@ model.add(Dense(128, activation='sigmoid'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
-model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.Adadelta(),
+model.compile(loss='categorical_crossentropy',
+              optimizer=Adam(lr=0.001),
               metrics=['accuracy'])
 
 model.fit(x_train, y_train,
