@@ -1,28 +1,12 @@
-## https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
-
-'''Trains a simple convnet on the MNIST dataset.
-Gets to 99.25% test accuracy after 12 epochs
-(there is still a lot of margin for parameter tuning).
-16 seconds per epoch on a GRID K520 GPU.
-'''
-
+import numpy as np
+np.set_printoptions(threshold=np.nan)
+import matplotlib.pyplot as plt
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-import pandas as pd
-from sklearn.preprocessing import OneHotEncoder
-import numpy as np
+from keras.layers import Dense, Dropout
 from keras.optimizers import Adam
-from TestTools import show_misclassified
-
-batch_size = 32
-num_classes = 10
-epochs = 11
-
-# input image dimensions
-img_rows, img_cols = 16, 16
-
+from sklearn.preprocessing import OneHotEncoder
+import pandas as pd
 
 def plot_results(history, epochs):
 	plt.style.use("ggplot")
@@ -36,7 +20,6 @@ def plot_results(history, epochs):
 	plt.ylabel("Loss/Accuracy")
 	plt.legend(loc="upper left")
 	plt.show()
-
 
 def load_data():
 
@@ -87,38 +70,46 @@ def load_data():
 
 	return trainData, trainLabels, testData, testLabels
 
+def plot_results(history, epochs):
+	plt.style.use("ggplot")
+	plt.figure()
+	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+	plt.title("Training Loss and Accuracy")
+	plt.xlabel("Epoch #")
+	plt.ylabel("Loss/Accuracy")
+	plt.legend(loc="upper left")
+	plt.show()
 
-x_train, y_train, x_test, y_test = load_data()
+if __name__ == "__main__":
 
-x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
-x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
-input_shape = (img_rows, img_cols, 1)
+	trainData, trainLabels, testData, testLabels = load_data()
 
+	batch_size = 128
+	num_classes = 10
+	epochs = 20
 
-model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),
-                 activation='relu',
-                 input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='tanh'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(128, activation='sigmoid'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes, activation='softmax'))
+	model = Sequential()
+	model.add(Dense(128, activation='relu', input_shape=(256,)))
+	model.add(Dense(128, activation='relu'))
+	model.add(Dense(num_classes, activation='softmax'))
 
-model.compile(loss='categorical_crossentropy',
-              optimizer=Adam(lr=0.001),
-              metrics=['accuracy'])
+	model.summary()
 
-model.fit(x_train, y_train,
-          batch_size=batch_size,
-          epochs=epochs,
-          verbose=1,
-          validation_data=(x_test, y_test))
+	model.compile(loss='categorical_crossentropy',
+	              optimizer=Adam(),
+	              metrics=['accuracy'])
 
-score = model.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+	history = model.fit(trainData, trainLabels,
+	                    batch_size=batch_size,
+	                    epochs=epochs,
+	                    verbose=1,
+	                    validation_data=(testData,testLabels))
 
-show_misclassified(x_test,model)
+	score = model.evaluate(testData, testLabels, verbose=0)
+	print('Test loss:', score[0])
+	print('Test accuracy:', score[1])
+
+	plot_results(history,epochs)

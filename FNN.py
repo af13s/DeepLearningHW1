@@ -8,6 +8,19 @@ from keras.optimizers import Adam
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 
+def plot_results(history, epochs):
+	plt.style.use("ggplot")
+	plt.figure()
+	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+	plt.title("Training Loss and Accuracy")
+	plt.xlabel("Epoch #")
+	plt.ylabel("Loss/Accuracy")
+	plt.legend(loc="upper left")
+	plt.show()
+
 def load_data():
 
 	trainData = []
@@ -79,10 +92,10 @@ if __name__ == "__main__":
 	epochs = 20
 
 	model = Sequential()
-	model.add(Dense(167, activation='relu', input_shape=(256,)))
-	model.add(Dropout(0.2))
-	model.add(Dense(167, activation='relu'))
-	model.add(Dropout(0.2))
+	model.add(Dense(128, activation='relu', input_shape=(256,)))
+	model.add(Dropout(0.25))
+	model.add(Dense(128, activation='relu'))
+	model.add(Dropout(0.25))
 	model.add(Dense(num_classes, activation='softmax'))
 
 	model.summary()

@@ -7,22 +7,21 @@ Gets to 99.25% test accuracy after 12 epochs
 '''
 
 import keras
+from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Conv2D, MaxPooling2D, LocallyConnected1D
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
-from TestTools import show_misclassified
 
 batch_size = 32
 num_classes = 10
-epochs = 11
+epochs = 15
 
 # input image dimensions
 img_rows, img_cols = 16, 16
-
 
 def plot_results(history, epochs):
 	plt.style.use("ggplot")
@@ -36,7 +35,6 @@ def plot_results(history, epochs):
 	plt.ylabel("Loss/Accuracy")
 	plt.legend(loc="upper left")
 	plt.show()
-
 
 def load_data():
 
@@ -90,35 +88,30 @@ def load_data():
 
 x_train, y_train, x_test, y_test = load_data()
 
-x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
-x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
-input_shape = (img_rows, img_cols, 1)
+x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols)
+x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols)
+input_shape = (img_rows, img_cols)
 
 
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),
+model.add(LocallyConnected1D(32, (3),
                  activation='relu',
                  input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='tanh'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
+model.add(LocallyConnected1D(64, (3), activation='tanh'))
 model.add(Flatten())
 model.add(Dense(128, activation='sigmoid'))
-model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
-
 model.compile(loss='categorical_crossentropy',
-              optimizer=Adam(lr=0.001),
+              optimizer=Adam(),
               metrics=['accuracy'])
 
-model.fit(x_train, y_train,
+history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
           validation_data=(x_test, y_test))
-
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-show_misclassified(x_test,model)
+plot_results(history,epochs)

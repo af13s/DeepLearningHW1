@@ -23,6 +23,18 @@ epochs = 15
 # input image dimensions
 img_rows, img_cols = 16, 16
 
+def plot_results(history, epochs):
+	plt.style.use("ggplot")
+	plt.figure()
+	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+	plt.title("Training Loss and Accuracy")
+	plt.xlabel("Epoch #")
+	plt.ylabel("Loss/Accuracy")
+	plt.legend(loc="upper left")
+	plt.show()
 
 def load_data():
 
@@ -97,7 +109,7 @@ model.compile(loss='categorical_crossentropy',
               optimizer=Adam(lr=0.001),
               metrics=['accuracy'])
 
-model.fit(x_train, y_train,
+history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
@@ -105,3 +117,5 @@ model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+plot_results(history,epochs)
