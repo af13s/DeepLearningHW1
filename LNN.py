@@ -15,6 +15,7 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
+from TestTools import plot_results, show_misclassified
 
 batch_size = 32
 num_classes = 10
@@ -23,18 +24,6 @@ epochs = 15
 # input image dimensions
 img_rows, img_cols = 16, 16
 
-def plot_results(history, epochs):
-	plt.style.use("ggplot")
-	plt.figure()
-	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
-	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
-	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
-	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
-	plt.title("Training Loss and Accuracy")
-	plt.xlabel("Epoch #")
-	plt.ylabel("Loss/Accuracy")
-	plt.legend(loc="upper left")
-	plt.show()
 
 def load_data():
 

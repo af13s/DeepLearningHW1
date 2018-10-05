@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 def show_misclassified(test_set, model):
 
@@ -37,3 +38,16 @@ def show_misclassified(test_set, model):
 			misclassified[tempLabels[i]] += 1
 
 	print (misclassified)
+
+def plot_results(history, epochs):
+	plt.style.use("ggplot")
+	plt.figure()
+	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+	plt.title("Training Loss and Accuracy")
+	plt.xlabel("Epoch #")
+	plt.ylabel("Loss/Accuracy")
+	plt.legend(loc="upper left")
+	plt.show()

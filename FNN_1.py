@@ -7,6 +7,7 @@ from keras.layers import Dense, Dropout
 from keras.optimizers import Adam
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
+from TestTools import plot_results, show_misclassified
 
 def plot_results(history, epochs):
 	plt.style.use("ggplot")
@@ -69,19 +70,6 @@ def load_data():
 		f.close()
 
 	return trainData, trainLabels, testData, testLabels
-
-def plot_results(history, epochs):
-	plt.style.use("ggplot")
-	plt.figure()
-	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
-	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
-	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
-	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
-	plt.title("Training Loss and Accuracy")
-	plt.xlabel("Epoch #")
-	plt.ylabel("Loss/Accuracy")
-	plt.legend(loc="upper left")
-	plt.show()
 
 if __name__ == "__main__":
 

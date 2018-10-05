@@ -8,6 +8,7 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
+from TestTools import plot_results, show_misclassified
 
 batch_size = 32
 num_classes = 10
