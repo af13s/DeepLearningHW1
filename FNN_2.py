@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
-from keras.optimizers import Adam
+from keras.optimizers import Nadam
 from sklearn.preprocessing import OneHotEncoder
+from keras.layers.normalization import BatchNormalization
 import pandas as pd
 from TestTools import plot_results, show_misclassified
 
@@ -62,27 +63,49 @@ if __name__ == "__main__":
 
 	trainData, trainLabels, testData, testLabels = load_data()
 
-	batch_size = 128
+	batch_size = 1
 	num_classes = 10
 	epochs = 10
 
+	# # Parameter Intialization
+	# model = Sequential()
+	# model.add(Dense(128, activation='relu', bias_initializer=keras.initializers.Constant(value=0.01), input_shape=(256,)))
+	# model.add(Dense(128, bias_initializer=keras.initializers.Constant(value=6.7), activation='sigmoid'))
+	# model.add(Dense(128, bias_initializer=keras.initializers.Constant(value=6.7), activation='tanh'))
+
+
 	model = Sequential()
 	model.add(Dense(128, activation='relu', input_shape=(256,)))
-	model.add(Dropout(0.25))
-	model.add(Dense(128, activation='relu'))
-	model.add(Dropout(0.25))
+	model.add(BatchNormalization())
+	model.add(Dense(128, activation='sigmoid'))
+	model.add(BatchNormalization())
+	model.add(Dense(128, activation='tanh'))
+	model.add(BatchNormalization())
+
+
 	model.add(Dense(num_classes, activation='softmax'))
 
 	model.summary()
 
+	# # Learning Rate
+	# model.compile(loss='categorical_crossentropy',
+	#               optimizer=Adam(lr=0.05),
+	#               metrics=['accuracy'])
+
 	model.compile(loss='categorical_crossentropy',
-	              optimizer=Adam(lr=0.001),
+	              optimizer=Nadam(lr=0.002, beta_1=0.9, beta_2=0.999),
 	              metrics=['accuracy'])
 
+	# model.compile(loss='categorical_crossentropy',
+ #              optimizer=Adam(lr=0.001),
+ #              metrics=['accuracy'])
+
+	#print(model.get_weights())
+	
 	history = model.fit(trainData, trainLabels,
 	                    batch_size=batch_size,
 	                    epochs=epochs,
-	                    verbose=1,
+	                    verbose=2,
 	                    validation_data=(testData,testLabels))
 
 	score = model.evaluate(testData, testLabels, verbose=0)
