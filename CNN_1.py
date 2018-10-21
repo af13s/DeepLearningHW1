@@ -48,15 +48,15 @@ for i in range(0,10):
 	          validation_data=(x_test, y_test))
 	score = model.evaluate(x_test, y_test, verbose=0)
 	print("Test Run: " , i)
-    print()
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
-    print()
-    loss_results.append(score[0])
-    accuracy_results.append(score[1])
+	print()
+	print('Test loss:', score[0])
+	print('Test accuracy:', score[1])
+	print()
+	loss_results.append(score[0])
+	accuracy_results.append(score[1])
 
-    model = None
-    
+	model = None
+
 loss_results = pd.Series(loss_results)
 accuracy_results = pd.Series(accuracy_results)
 
