@@ -150,7 +150,7 @@ def compile_and_train(model,  dataset, epochs):
     history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
-          verbose=1,
+          verbose=0,
           validation_data=(x_test, y_test))
 
     score = model.evaluate(x_test, y_test, verbose=0)
@@ -172,6 +172,11 @@ def evaluate_error(model):
 cnn_model = cnn(cnn_dataset)
 cnn_model_2 = cnn2(cnn_dataset)
 cnn_model_3 = cnn3(cnn_dataset)
+
+
+cnn_model_ = cnn(cnn_dataset)
+cnn_model_2_ = cnn2(cnn_dataset)
+cnn_model_3_ = cnn3(cnn_dataset)
 # fnn_model = fnn(fnn_dataset)
 # lnn_model = lnn(lnn_dataset)
 
@@ -179,6 +184,10 @@ cnn_model_3 = cnn3(cnn_dataset)
 compile_and_train(cnn_model, cnn_dataset, epochs = epochs)
 compile_and_train(cnn_model_2, cnn_dataset, epochs = epochs)
 compile_and_train(cnn_model_3, cnn_dataset, epochs = epochs)
+
+compile_and_train(cnn_model_, cnn_dataset, epochs = epochs)
+compile_and_train(cnn_model_2_, cnn_dataset, epochs = epochs)
+compile_and_train(cnn_model_3_, cnn_dataset, epochs = epochs)
 # compile_and_train(fnn_model, fnn_dataset, epochs = epochs)
 # compile_and_train(lnn_model, lnn_dataset, epochs = epochs)
 
@@ -195,9 +204,9 @@ compile_and_train(cnn_model_3, cnn_dataset, epochs = epochs)
 # conv_pool_cnn_model.load_weights('weights/conv_pool_cnn.29-0.10.hdf5')
 # all_cnn_model.load_weights('weights/all_cnn.30-0.08.hdf5')
 # nin_cnn_model.load_weights('weights/nin_cnn.30-0.93.hdf5')
-
+ 
 # models = [cnn_model, fnn_model, lnn_model]
-models = [cnn_model, cnn_model_2, cnn_model_3]
+models = [cnn_model, cnn_model_2, cnn_model_3, cnn_model_, cnn_model_2_, cnn_model_3_]
 
 def ensemble(models):
 
@@ -207,6 +216,9 @@ def ensemble(models):
     predictions =  np.array(models[0].predict(cnn_dataset[2]))
     predictions +=  np.array(models[1].predict(cnn_dataset[2]))
     predictions +=  np.array(models[2].predict(cnn_dataset[2]))
+    predictions +=  np.array(models[3].predict(cnn_dataset[2]))
+    predictions +=  np.array(models[4].predict(cnn_dataset[2]))
+    predictions +=  np.array(models[5].predict(cnn_dataset[2]))
     # predictions +=  np.array(models[1].predict(fnn_dataset[2]))
     # predictions +=  np.array(models[2].predict(lnn_dataset[2]))
 
