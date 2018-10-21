@@ -84,15 +84,29 @@ x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols)
 input_shape = (img_rows, img_cols)
 
 
+# model = Sequential()
+# model.add(LocallyConnected1D(32, (3),
+#                  activation='relu',
+#                  input_shape=input_shape))
+# model.add(LocallyConnected1D(64, (3), activation='tanh',activity_regularizer=regularizers.l1(0.0009)),)
+# # model.add(Dropout(0.25))
+# model.add(Flatten())
+# model.add(Dense(128, activation='sigmoid',activity_regularizer=regularizers.l1(0.0009)),)
+# # model.add(Dropout(0.5))
+# model.add(Dense(num_classes, activation='softmax'))
+# model.compile(loss='categorical_crossentropy',
+#               optimizer=Adam(),
+#               metrics=['accuracy'])
+
 model = Sequential()
-model.add(LocallyConnected1D(32, (3),
+model.add(LocallyConnected1D(64, (3),
                  activation='relu',
                  input_shape=input_shape))
 model.add(LocallyConnected1D(64, (3), activation='tanh'))
-# model.add(Dropout(0.25))
+model.add(Dropout(0.4))
 model.add(Flatten())
-model.add(Dense(128, activation='sigmoid'))
-# model.add(Dropout(0.5))
+model.add(Dense(128, activation='sigmoid',),)
+model.add(Dropout(0.4))
 model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy',
               optimizer=Adam(),

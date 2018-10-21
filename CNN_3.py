@@ -11,9 +11,9 @@ from keras.optimizers import Adam
 from TestTools import plot_results, show_misclassified
 from keras import regularizers
 
-batch_size = 32
+batch_size = 128
 num_classes = 10
-epochs = 15
+epochs = 200
 
 # input image dimensions
 img_rows, img_cols = 16, 16
@@ -93,10 +93,10 @@ model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3),
                  activation='relu',
                  input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='tanh'))
+model.add(Conv2D(64, (3, 3), activation='tanh', kernel_regularizer=regularizers.l1(0.001)))
 # model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(128, activation='sigmoid'))
+model.add(Dense(128, activation='sigmoid', kernel_regularizer=regularizers.l1(0.001)))
 # model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 

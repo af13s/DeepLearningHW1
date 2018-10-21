@@ -10,7 +10,7 @@ import numpy as np
 from keras.optimizers import Adam
 from TestTools import plot_results, show_misclassified
 
-batch_size = 32
+batch_size = 128
 num_classes = 10
 epochs = 15
 

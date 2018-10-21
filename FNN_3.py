@@ -115,9 +115,9 @@ if __name__ == "__main__":
 
 	model = Sequential()
 	model.add(Dense(128, activation='relu', input_shape=(256,)))
-	model.add(Dense(128, activation='sigmoid'))
+	model.add(Dense(128, activation='sigmoid',activity_regularizer=regularizers.l1(0.001)),)
 	# model.add(Dropout(0.25))
-	model.add(Dense(128, activation='tanh'))
+	model.add(Dense(128, activation='tanh',activity_regularizer=regularizers.l1(0.001)),)
 	# model.add(Dropout(0.5))
 	model.add(Dense(num_classes, activation='softmax'))
 
