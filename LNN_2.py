@@ -6,6 +6,9 @@ Gets to 99.25% test accuracy after 12 epochs
 16 seconds per epoch on a GRID K520 GPU.
 '''
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential

@@ -1,3 +1,6 @@
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
 import numpy as np
 np.set_printoptions(threshold=np.nan)
 import matplotlib.pyplot as plt
@@ -11,17 +14,17 @@ from sklearn.metrics import confusion_matrix
 import itertools
 
 def plot_results(history, epochs):
-	plt.style.use("ggplot")
-	plt.figure()
-	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
-	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
-	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
-	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
-	plt.title("Training Loss and Accuracy")
-	plt.xlabel("Epoch #")
-	plt.ylabel("Loss/Accuracy")
-	plt.legend(loc="upper left")
-	plt.show()
+        plt.style.use("ggplot")
+        plt.figure()
+        plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
+        plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
+        plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
+        plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
+        plt.title("Training Loss and Accuracy")
+        plt.xlabel("Epoch #")
+        plt.ylabel("Loss/Accuracy")
+        plt.legend(loc="upper left")
+        plt.show()
 
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
@@ -57,87 +60,108 @@ def plot_confusion_matrix(cm, classes,
 
 def load_data():
 
-	trainData = []
-	trainLabels = []
-	testData = []
-	testLabels = []
+        trainData = []
+        trainLabels = []
+        testData = []
+        testLabels = []
 
-	classes = [0,1,2,3,4,5,6,7,8,9]
-	label_encoder = pd.factorize(classes)
-	labels_1hot = OneHotEncoder().fit_transform(label_encoder[0].reshape(-1,1))
-	onehot_array = labels_1hot.toarray()
+        classes = [0,1,2,3,4,5,6,7,8,9]
+        label_encoder = pd.factorize(classes)
+        labels_1hot = OneHotEncoder().fit_transform(label_encoder[0].reshape(-1,1))
+        onehot_array = labels_1hot.toarray()
 
-	d1 = dict(zip(classes,onehot_array.tolist()))
+        d1 = dict(zip(classes,onehot_array.tolist()))
 
-	for i,file in enumerate(['zip_train.txt', 'zip_test.txt']):
-		f = open(file)
+        for i,file in enumerate(['zip_train.txt', 'zip_test.txt']):
+                f = open(file)
 
-		tempLabels = []
-		tempData = []
+                tempLabels = []
+                tempData = []
 
-		for line in f:
-			line = line.split()
-			thelabel = line.pop(0)
-			thelabel = int(float((thelabel)))
+                for line in f:
+                        line = line.split()
+                        thelabel = line.pop(0)
+                        thelabel = int(float((thelabel)))
 
-			line = [float(i) for i in line]
-			theX = np.interp(line, (-1,1), (0, 1))
+                        line = [float(i) for i in line]
+                        theX = np.interp(line, (-1,1), (0, 1))
 
-			tempLabels.append(thelabel)
-			tempData.append(theX)
+                        tempLabels.append(thelabel)
+                        tempData.append(theX)
 
-		for label in tempLabels:
-		    encoding = d1[label]
-		    if i == 0:
-		    	trainLabels.append(encoding)
-		    else:
-		    	testLabels.append(encoding)
+                for label in tempLabels:
+                    encoding = d1[label]
+                    if i == 0:
+                        trainLabels.append(encoding)
+                    else:
+                        testLabels.append(encoding)
 
-		if i == 0:
-			trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
-			trainData = np.array(tempData)
-		else:
-			testLabels = np.array(testLabels).reshape((-1,len(classes)))
-			testData = np.array(tempData)
+                if i == 0:
+                        trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
+                        trainData = np.array(tempData)
+                else:
+                        testLabels = np.array(testLabels).reshape((-1,len(classes)))
+                        testData = np.array(tempData)
 
-		f.close()
+                f.close()
 
-	return trainData, trainLabels, testData, testLabels
+        return trainData, trainLabels, testData, testLabels
 
 if __name__ == "__main__":
 
-	trainData, trainLabels, testData, testLabels = load_data()
+        loss_results = []
+        accuracy_results = []
 
-	batch_size = 128
-	num_classes = 10
-	epochs = 20
+        for i in range(0,10):
+            trainData, trainLabels, testData, testLabels = load_data()
 
-	model = Sequential()
-	model.add(Dense(128, activation='relu', input_shape=(256,)))
-	model.add(Dense(128, activation='sigmoid'))
-	model.add(Dense(128, activation='tanh'))
-	model.add(Dense(num_classes, activation='softmax'))
+            batch_size = 128
+            num_classes = 10
+            epochs = 20
 
-	model.summary()
+            model = Sequential()
+            model.add(Dense(128, activation='relu', input_shape=(256,)))
+            model.add(Dense(128, activation='sigmoid'))
+            model.add(Dense(128, activation='tanh'))
+            model.add(Dense(num_classes, activation='softmax'))
 
-	model.compile(loss='categorical_crossentropy',
-	              optimizer=Adam(),
-	              metrics=['accuracy'])
+            model.summary()
 
-	history = model.fit(trainData, trainLabels,
-	                    batch_size=batch_size,
-	                    epochs=epochs,
-	                    verbose=1,
-	                    validation_data=(testData,testLabels))
+            model.compile(loss='categorical_crossentropy',
+                        optimizer=Adam(),
+                        metrics=['accuracy'])
 
-	score = model.evaluate(testData, testLabels, verbose=0)
-	print('Test loss:', score[0])
-	print('Test accuracy:', score[1])
+            history = model.fit(trainData, trainLabels,
+                                batch_size=batch_size,
+                                epochs=epochs,
+                                verbose=0,
+                                validation_data=(testData,testLabels))
 
-	plot_results(history,epochs)
+            score = model.evaluate(testData, testLabels, verbose=0)
+            print("Test Run: " , i)
+            print()
+            print('Test loss:', score[0])
+            print('Test accuracy:', score[1])
+            print()
+            loss_results.append(score[0])
+            accuracy_results.append(score[1])
 
-	classes = ['0','1','2','3','4','5','6','7','8','9']
-	predictions = model.predict(testData).argmax(axis=-1)
-	trueOutputs = testLabels.argmax(axis=-1)
-	cm = confusion_matrix(trueOutputs,predictions)
-	plot_confusion_matrix(cm,classes)
+            model = None
+    
+            #plot_results(history,epochs)
+
+        loss_results = pd.Series(loss_results)
+        accuracy_results = pd.Series(accuracy_results)
+        
+        print("Loss Statistics")
+        print(loss_results.describe())
+        print()
+        print("Accuracy Statistics")
+        print(accuracy_results.describe())
+        '''
+        classes = ['0','1','2','3','4','5','6','7','8','9']
+        predictions = model.predict(testData).argmax(axis=-1)
+        trueOutputs = testLabels.argmax(axis=-1)
+        cm = confusion_matrix(trueOutputs,predictions)
+        plot_confusion_matrix(cm,classes)
+        '''
