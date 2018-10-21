@@ -3,6 +3,12 @@
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config=config)
+set_session(sess)  # set this TensorFlow session as the default session for Keras
 
 import keras
 from keras.models import Sequential
@@ -13,6 +19,7 @@ from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
 from TestTools import plot_results, load_data
+from keras import regularizers
 
 batch_size = 128
 num_classes = 10
@@ -35,12 +42,11 @@ for i in range(0,10):
         model = Sequential()
         model.add(Conv2D(32, kernel_size=(3, 3),
                          activation='relu',
+                         kernel_regularizer=regularizers.l1(0.001),
                          input_shape=input_shape))
-        model.add(Conv2D(64, (3, 3), activation='tanh'))
-        model.add(Dropout(0.25))
+        model.add(Conv2D(64, (3, 3), activation='tanh', kernel_regularizer=regularizers.l1(0.001)))
         model.add(Flatten())
         model.add(Dense(128, activation='sigmoid'))
-        model.add(Dropout(.25))
         model.add(Dense(num_classes, activation='softmax'))
 
         #model.add(Dense(128, activation='sigmoid', kernel_regularizer=regularizers.l1(0.001)))
