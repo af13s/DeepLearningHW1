@@ -1,0 +1,1 @@
+cat task3_ensemble_cnn_report.txt | grep "Test Run"

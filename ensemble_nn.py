@@ -124,42 +124,7 @@ def compile_and_train(model, dataset, epochs):
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
 
-    return history
-
-#Initialize network input
-cnn_model = cnn(cnn_dataset)
-cnn_model_2 = cnn2(cnn_dataset)
-cnn_model_3 = cnn3(cnn_dataset)
-
-cnn_model_ = cnn(cnn_dataset)
-cnn_model_2_ = cnn2(cnn_dataset)
-cnn_model_3_ = cnn3(cnn_dataset)
-
-#train network
-compile_and_train(cnn_model, cnn_dataset, epochs = epochs)
-compile_and_train(cnn_model_2, cnn_dataset, epochs = epochs)
-compile_and_train(cnn_model_3, cnn_dataset, epochs = epochs)
-
-compile_and_train(cnn_model_, cnn_dataset, epochs = epochs)
-compile_and_train(cnn_model_2_, cnn_dataset, epochs = epochs)
-compile_and_train(cnn_model_3_, cnn_dataset, epochs = epochs)
-
-#evaluate loss
-# evaluate_error(cnn_model)
-# evaluate_error(fnn_model)
-# evaluate_error(lnn_model)
-
-# # Three Model Ensemble
-# conv_pool_cnn_model = conv_pool_cnn(model_input)
-# all_cnn_model = all_cnn(model_input)
-# nin_cnn_model = nin_cnn(model_input)
-
-# conv_pool_cnn_model.load_weights('weights/conv_pool_cnn.29-0.10.hdf5')
-# all_cnn_model.load_weights('weights/all_cnn.30-0.08.hdf5')
-# nin_cnn_model.load_weights('weights/nin_cnn.30-0.93.hdf5')
- 
-# models = [cnn_model, fnn_model, lnn_model]
-models = [cnn_model, cnn_model_2, cnn_model_3, cnn_model_, cnn_model_2_, cnn_model_3_]
+    return score[1]
 
 def ensemble(models):
 
@@ -183,6 +148,55 @@ def ensemble(models):
         if guess == correct_class:
             count+=1
     
-    print ("\nEnsemble Accuracy: " , str(count/len(y_test)))
+    return  count/len(y_test)
 
-ensemble(models)
+ensemble_results = []
+cnn_accuracys = []
+
+for i in range(0,10):
+
+    print ("Test Run: ", i)
+    #Initialize network input
+    cnn_model = cnn(cnn_dataset)
+    cnn_model_2 = cnn2(cnn_dataset)
+    cnn_model_3 = cnn3(cnn_dataset)
+
+    cnn_model_ = cnn(cnn_dataset)
+    cnn_model_2_ = cnn2(cnn_dataset)
+    cnn_model_3_ = cnn3(cnn_dataset)
+
+    temp = []
+    #train network
+    temp.append(compile_and_train(cnn_model, cnn_dataset, epochs = epochs))
+    temp.append(compile_and_train(cnn_model_2, cnn_dataset, epochs = epochs))
+    temp.append(compile_and_train(cnn_model_3, cnn_dataset, epochs = epochs))
+
+    temp.append(compile_and_train(cnn_model_, cnn_dataset, epochs = epochs))
+    temp.append(compile_and_train(cnn_model_2_, cnn_dataset, epochs = epochs))
+    temp.append(compile_and_train(cnn_model_3_, cnn_dataset, epochs = epochs))
+
+    cnn_accuracys.append(temp)
+
+    models = [cnn_model, cnn_model_2, cnn_model_3, cnn_model_, cnn_model_2_, cnn_model_3_]
+
+    ensemble_results.append(ensemble(models))
+
+    print()
+    print("Ensemble Accuracy: ", ensemble_results[i])
+
+    cnn_model = None
+    cnn_model_2 = None
+    cnn_model_3 = None
+
+    cnn_model_ = None
+    cnn_model_2_ = None
+    cnn_model_3_ = None
+
+ensemble_results = pd.Series(ensemble_results)
+cnn_accuracys = pd.DataFrame(cnn_accuracys)
+print("Ensemble Statistics")
+print(ensemble_results.describe())
+print("Individual Convolutional Statistics")
+print(cnn_accuracys.describe())
+
+
