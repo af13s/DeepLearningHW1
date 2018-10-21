@@ -1,5 +1,9 @@
 ## https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
+
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
