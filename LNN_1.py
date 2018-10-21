@@ -27,7 +27,7 @@ epochs = 15
 img_rows, img_cols = 16, 16
 
 
-x_train, y_train, x_test, y_test = load_data()
+x_train, y_train, x_test, y_test = load_data(img_rows, img_cols)
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
 x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
@@ -57,16 +57,16 @@ for i in range(0,10):
 	          validation_data=(x_test, y_test))
 	score = model.evaluate(x_test, y_test, verbose=0)
 	print("Test Run: " , i)
-    print()
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
-    print()
-    loss_results.append(score[0])
-    accuracy_results.append(score[1])
+	print()
+	print('Test loss:', score[0])
+	print('Test accuracy:', score[1])
+	print()
+	loss_results.append(score[0])
+	accuracy_results.append(score[1])
 
 
-    model = None
-    
+	model = None
+
 loss_results = pd.Series(loss_results)
 accuracy_results = pd.Series(accuracy_results)
 

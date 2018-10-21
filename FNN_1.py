@@ -21,7 +21,7 @@ if __name__ == "__main__":
         accuracy_results = []
 
         for i in range(0,10):
-            trainData, trainLabels, testData, testLabels = load_data()
+            trainData, trainLabels, testData, testLabels = load_data(img_rows, img_cols)
 
             batch_size = 128
             num_classes = 10

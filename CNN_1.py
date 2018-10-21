@@ -17,7 +17,7 @@ epochs = 15
 # input image dimensions
 img_rows, img_cols = 16, 16
 
-x_train, y_train, x_test, y_test = load_data()
+x_train, y_train, x_test, y_test = load_data(img_rows, img_cols)
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
 x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
