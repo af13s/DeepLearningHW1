@@ -1,5 +1,8 @@
 # https://towardsdatascience.com/ensembling-convnets-using-keras-237d429157eb
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+
 import keras
 from keras.models import Sequential, Input, Model
 from keras.layers import Dense, Dropout, Flatten
@@ -19,8 +22,8 @@ from keras.optimizers import Adam
 
 img_rows, img_cols = 16,16
 num_classes = 10
-batch_size = 32
-epochs = 10
+batch_size = 32 
+epochs = 5
 
 x_train, y_train, x_test, y_test = load_data(img_rows, img_cols)
 
@@ -46,21 +49,8 @@ fnn_dataset = (x_train, y_train, x_test, y_test, (256,))
 cnn_dataset = cnn_data(x_train, y_train, x_test, y_test)
 lnn_dataset = lnn_data(x_train, y_train, x_test, y_test)
 
-    
 
 # Ensemble of Networks
-
-def fnn(dataset):
-
-    x_train, y_train, x_test, y_test, input_shape = dataset
-    
-    model = Sequential()
-    model.add(Dense(128, activation='relu', input_shape=(256,)))
-    model.add(Dense(128, activation='sigmoid'))
-    model.add(Dense(128, activation='tanh'))
-    model.add(Dense(num_classes, activation='softmax'))
-    
-    return model
 
 def cnn( dataset ):
 
@@ -116,33 +106,10 @@ def cnn3( dataset ):
     
     return model
 
-
-def lnn(dataset):
-
-    x_train, y_train, x_test, y_test, input_shape = dataset
-    
-    model = Sequential()
-    model.add(LocallyConnected1D(32, (3),
-                 activation='relu',
-                 input_shape=input_shape))
-    model.add(LocallyConnected1D(64, (3), activation='tanh'))
-    model.add(Flatten())
-    model.add(Dense(128, activation='sigmoid'))
-    model.add(Dense(num_classes, activation='softmax'))
-    
-    return model
-
-
-def compile_and_train(model,  dataset, epochs): 
+def compile_and_train(model, dataset, epochs): 
 
     x_train, y_train, x_test, y_test, input_shape = dataset
     
-    # model.compile(loss=categorical_crossentropy, optimizer=Adam(), metrics=['acc']) 
-    # filepath = 'weights/' + model.name + '.{epoch:02d}-{loss:.2f}.hdf5'
-    # checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=0, save_weights_only=True, save_best_only=True, mode='auto', period=1)
-    # tensor_board = TensorBoard(log_dir='logs/', histogram_freq=0, batch_size=32)
-    # history = model.fit(x=x_train, y=y_train, batch_size=32, epochs=num_epochs, verbose=1, callbacks=[checkpoint, tensor_board], validation_split=0.2)
-
     model.compile(loss='categorical_crossentropy',
               optimizer=Adam(),
               metrics=['accuracy'])
@@ -150,7 +117,7 @@ def compile_and_train(model,  dataset, epochs):
     history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
-          verbose=0,
+          verbose=1,
           validation_data=(x_test, y_test))
 
     score = model.evaluate(x_test, y_test, verbose=0)
@@ -159,26 +126,14 @@ def compile_and_train(model,  dataset, epochs):
 
     return history
 
-def evaluate_error(model):
-    pred = model.predict(x_test, batch_size = 32)
-    pred = np.argmax(pred, axis=1)
-    pred = np.expand_dims(pred, axis=1) # make same shape as y_test
-    error = np.sum(np.not_equal(pred, y_test)) / y_test.shape[0]  
-  
-    return error
-
-
 #Initialize network input
 cnn_model = cnn(cnn_dataset)
 cnn_model_2 = cnn2(cnn_dataset)
 cnn_model_3 = cnn3(cnn_dataset)
 
-
 cnn_model_ = cnn(cnn_dataset)
 cnn_model_2_ = cnn2(cnn_dataset)
 cnn_model_3_ = cnn3(cnn_dataset)
-# fnn_model = fnn(fnn_dataset)
-# lnn_model = lnn(lnn_dataset)
 
 #train network
 compile_and_train(cnn_model, cnn_dataset, epochs = epochs)
@@ -188,8 +143,6 @@ compile_and_train(cnn_model_3, cnn_dataset, epochs = epochs)
 compile_and_train(cnn_model_, cnn_dataset, epochs = epochs)
 compile_and_train(cnn_model_2_, cnn_dataset, epochs = epochs)
 compile_and_train(cnn_model_3_, cnn_dataset, epochs = epochs)
-# compile_and_train(fnn_model, fnn_dataset, epochs = epochs)
-# compile_and_train(lnn_model, lnn_dataset, epochs = epochs)
 
 #evaluate loss
 # evaluate_error(cnn_model)
@@ -222,7 +175,7 @@ def ensemble(models):
     # predictions +=  np.array(models[1].predict(fnn_dataset[2]))
     # predictions +=  np.array(models[2].predict(lnn_dataset[2]))
 
-    # predictions = (predictions/len(models))
+    predictions = (predictions/len(models))
 
     for i in range(len(predictions)):
         correct_class = y_test[i].argmax()
