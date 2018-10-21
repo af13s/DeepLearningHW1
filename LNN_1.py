@@ -18,8 +18,7 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
-from TestTools import plot_results, show_misclassified
-
+from TestTools import plot_results, load_data
 batch_size = 32
 num_classes = 10
 epochs = 15
@@ -28,83 +27,53 @@ epochs = 15
 img_rows, img_cols = 16, 16
 
 
-
-def load_data():
-
-	trainData = []
-	trainLabels = []
-	testData = []
-	testLabels = []
-
-	classes = [0,1,2,3,4,5,6,7,8,9]
-	label_encoder = pd.factorize(classes)
-	labels_1hot = OneHotEncoder().fit_transform(label_encoder[0].reshape(-1,1))
-	onehot_array = labels_1hot.toarray()
-
-	d1 = dict(zip(classes,onehot_array.tolist()))
-
-	for i,file in enumerate(['zip_train.txt', 'zip_test.txt']):
-		f = open(file)
-
-		tempLabels = []
-		tempData = []
-
-		for line in f:
-			line = line.split()
-			thelabel = line.pop(0)
-			thelabel = int(float((thelabel)))
-
-			line = [float(i) for i in line]
-			theX = np.interp(line, (-1,1), (0, 1))
-
-			tempLabels.append(thelabel)
-			tempData.append(theX)
-
-		for label in tempLabels:
-		    encoding = d1[label]
-		    if i == 0:
-		    	trainLabels.append(encoding)
-		    else:
-		    	testLabels.append(encoding)
-
-		if i == 0:
-			trainLabels = np.array(trainLabels).reshape((-1,len(classes)))
-			trainData = np.array(tempData)
-		else:
-			testLabels = np.array(testLabels).reshape((-1,len(classes)))
-			testData = np.array(tempData)
-
-		f.close()
-
-	return trainData, trainLabels, testData, testLabels
-
-
 x_train, y_train, x_test, y_test = load_data()
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
 x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
 input_shape = (img_rows, img_cols, 1)
 
+loss_results = []
+accuracy_results = []
 
-model = Sequential()
-model.add(LocallyConnected2D(32, (3,3),
-                 activation='relu',
-                 input_shape=input_shape))
-model.add(LocallyConnected2D(64, (3,3), activation='tanh'))
-model.add(Flatten())
-model.add(Dense(128, activation='sigmoid'))
-model.add(Dense(num_classes, activation='softmax'))
-model.compile(loss='categorical_crossentropy',
-              optimizer=Adam(),
-              metrics=['accuracy'])
+for i in range(0,10):
 
-history = model.fit(x_train, y_train,
-          batch_size=batch_size,
-          epochs=epochs,
-          verbose=1,
-          validation_data=(x_test, y_test))
-score = model.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+	model = Sequential()
+	model.add(LocallyConnected2D(32, (3,3),
+	                 activation='relu',
+	                 input_shape=input_shape))
+	model.add(LocallyConnected2D(64, (3,3), activation='tanh'))
+	model.add(Flatten())
+	model.add(Dense(128, activation='sigmoid'))
+	model.add(Dense(num_classes, activation='softmax'))
+	model.compile(loss='categorical_crossentropy',
+	              optimizer=Adam(),
+	              metrics=['accuracy'])
 
-plot_results(history,epochs)
+	history = model.fit(x_train, y_train,
+	          batch_size=batch_size,
+	          epochs=epochs,
+	          verbose=1,
+	          validation_data=(x_test, y_test))
+	score = model.evaluate(x_test, y_test, verbose=0)
+	print("Test Run: " , i)
+    print()
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
+    print()
+    loss_results.append(score[0])
+    accuracy_results.append(score[1])
+
+
+    model = None
+    
+loss_results = pd.Series(loss_results)
+accuracy_results = pd.Series(accuracy_results)
+
+print("Loss Statistics")
+print(loss_results.describe())
+print()
+print("Accuracy Statistics")
+print(accuracy_results.describe())
+
+	# plot_results(history,epochs)
