@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
         loss_results = []
         accuracy_results = []
+        img_rows, img_cols = 16,16
 
         for i in range(0,10):
             trainData, trainLabels, testData, testLabels = load_data(img_rows, img_cols)
@@ -42,7 +43,7 @@ if __name__ == "__main__":
             history = model.fit(trainData, trainLabels,
                                 batch_size=batch_size,
                                 epochs=epochs,
-                                verbose=0,
+                                verbose=1,
                                 validation_data=(testData,testLabels))
 
             score = model.evaluate(testData, testLabels, verbose=0)

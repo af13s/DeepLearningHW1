@@ -1,0 +1,531 @@
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_1 (Dense)              (None, 128)               32896     
+_________________________________________________________________
+dense_2 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_3 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_4 (Dense)              (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.3406 - acc: 0.6150 - val_loss: 0.6329 - val_acc: 0.8281
+Epoch 2/15
+ - 0s - loss: 0.3536 - acc: 0.9073 - val_loss: 0.3934 - val_acc: 0.8899
+Epoch 3/15
+ - 0s - loss: 0.2222 - acc: 0.9387 - val_loss: 0.3318 - val_acc: 0.9143
+Epoch 4/15
+ - 0s - loss: 0.1660 - acc: 0.9561 - val_loss: 0.3030 - val_acc: 0.9173
+Epoch 5/15
+ - 0s - loss: 0.1350 - acc: 0.9628 - val_loss: 0.2871 - val_acc: 0.9253
+Epoch 6/15
+ - 0s - loss: 0.1163 - acc: 0.9674 - val_loss: 0.2791 - val_acc: 0.9278
+Epoch 7/15
+ - 0s - loss: 0.0935 - acc: 0.9744 - val_loss: 0.2773 - val_acc: 0.9278
+Epoch 8/15
+ - 0s - loss: 0.0782 - acc: 0.9782 - val_loss: 0.2781 - val_acc: 0.9342
+Epoch 9/15
+ - 0s - loss: 0.0641 - acc: 0.9835 - val_loss: 0.2651 - val_acc: 0.9342
+Epoch 10/15
+ - 0s - loss: 0.0554 - acc: 0.9863 - val_loss: 0.2841 - val_acc: 0.9253
+Epoch 11/15
+ - 0s - loss: 0.0456 - acc: 0.9885 - val_loss: 0.2598 - val_acc: 0.9367
+Epoch 12/15
+ - 0s - loss: 0.0363 - acc: 0.9912 - val_loss: 0.2593 - val_acc: 0.9342
+Epoch 13/15
+ - 0s - loss: 0.0279 - acc: 0.9949 - val_loss: 0.2635 - val_acc: 0.9367
+Epoch 14/15
+ - 0s - loss: 0.0242 - acc: 0.9955 - val_loss: 0.2619 - val_acc: 0.9392
+Epoch 15/15
+ - 0s - loss: 0.0207 - acc: 0.9964 - val_loss: 0.2663 - val_acc: 0.9397
+Test Run:  0
+
+Test loss: 0.26633676438484255
+Test accuracy: 0.9397110115786839
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_5 (Dense)              (None, 128)               32896     
+_________________________________________________________________
+dense_6 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_7 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_8 (Dense)              (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.2506 - acc: 0.6483 - val_loss: 0.5746 - val_acc: 0.8331
+Epoch 2/15
+ - 0s - loss: 0.3152 - acc: 0.9189 - val_loss: 0.3745 - val_acc: 0.8944
+Epoch 3/15
+ - 0s - loss: 0.2065 - acc: 0.9423 - val_loss: 0.3311 - val_acc: 0.9078
+Epoch 4/15
+ - 0s - loss: 0.1678 - acc: 0.9520 - val_loss: 0.3072 - val_acc: 0.9133
+Epoch 5/15
+ - 0s - loss: 0.1368 - acc: 0.9634 - val_loss: 0.2900 - val_acc: 0.9208
+Epoch 6/15
+ - 0s - loss: 0.1191 - acc: 0.9683 - val_loss: 0.2791 - val_acc: 0.9213
+Epoch 7/15
+ - 0s - loss: 0.0998 - acc: 0.9738 - val_loss: 0.2736 - val_acc: 0.9248
+Epoch 8/15
+ - 0s - loss: 0.0865 - acc: 0.9771 - val_loss: 0.2758 - val_acc: 0.9307
+Epoch 9/15
+ - 0s - loss: 0.0724 - acc: 0.9798 - val_loss: 0.2640 - val_acc: 0.9317
+Epoch 10/15
+ - 0s - loss: 0.0627 - acc: 0.9833 - val_loss: 0.2621 - val_acc: 0.9312
+Epoch 11/15
+ - 0s - loss: 0.0523 - acc: 0.9879 - val_loss: 0.2630 - val_acc: 0.9317
+Epoch 12/15
+ - 0s - loss: 0.0461 - acc: 0.9883 - val_loss: 0.2670 - val_acc: 0.9342
+Epoch 13/15
+ - 0s - loss: 0.0373 - acc: 0.9919 - val_loss: 0.2632 - val_acc: 0.9347
+Epoch 14/15
+ - 0s - loss: 0.0321 - acc: 0.9927 - val_loss: 0.2744 - val_acc: 0.9332
+Epoch 15/15
+ - 0s - loss: 0.0256 - acc: 0.9949 - val_loss: 0.2648 - val_acc: 0.9377
+Test Run:  1
+
+Test loss: 0.2648492030275955
+Test accuracy: 0.9377179871641348
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_9 (Dense)              (None, 128)               32896     
+_________________________________________________________________
+dense_10 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_11 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_12 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.3777 - acc: 0.6054 - val_loss: 0.6262 - val_acc: 0.8371
+Epoch 2/15
+ - 0s - loss: 0.3329 - acc: 0.9174 - val_loss: 0.3703 - val_acc: 0.8939
+Epoch 3/15
+ - 0s - loss: 0.2111 - acc: 0.9428 - val_loss: 0.3402 - val_acc: 0.9023
+Epoch 4/15
+ - 0s - loss: 0.1627 - acc: 0.9564 - val_loss: 0.3097 - val_acc: 0.9183
+Epoch 5/15
+ - 0s - loss: 0.1324 - acc: 0.9641 - val_loss: 0.2987 - val_acc: 0.9208
+Epoch 6/15
+ - 0s - loss: 0.1163 - acc: 0.9672 - val_loss: 0.2797 - val_acc: 0.9268
+Epoch 7/15
+ - 0s - loss: 0.0988 - acc: 0.9723 - val_loss: 0.2744 - val_acc: 0.9297
+Epoch 8/15
+ - 0s - loss: 0.0810 - acc: 0.9776 - val_loss: 0.2715 - val_acc: 0.9283
+Epoch 9/15
+ - 0s - loss: 0.0705 - acc: 0.9805 - val_loss: 0.2631 - val_acc: 0.9322
+Epoch 10/15
+ - 0s - loss: 0.0582 - acc: 0.9856 - val_loss: 0.2624 - val_acc: 0.9307
+Epoch 11/15
+ - 0s - loss: 0.0493 - acc: 0.9875 - val_loss: 0.2600 - val_acc: 0.9367
+Epoch 12/15
+ - 0s - loss: 0.0405 - acc: 0.9908 - val_loss: 0.2635 - val_acc: 0.9347
+Epoch 13/15
+ - 0s - loss: 0.0332 - acc: 0.9923 - val_loss: 0.2560 - val_acc: 0.9387
+Epoch 14/15
+ - 0s - loss: 0.0300 - acc: 0.9941 - val_loss: 0.2629 - val_acc: 0.9367
+Epoch 15/15
+ - 0s - loss: 0.0250 - acc: 0.9952 - val_loss: 0.2646 - val_acc: 0.9387
+Test Run:  2
+
+Test loss: 0.26460315508737337
+Test accuracy: 0.9387144993714094
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_13 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_14 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_15 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_16 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.3516 - acc: 0.5921 - val_loss: 0.6381 - val_acc: 0.8351
+Epoch 2/15
+ - 0s - loss: 0.3507 - acc: 0.9059 - val_loss: 0.3798 - val_acc: 0.8914
+Epoch 3/15
+ - 0s - loss: 0.2121 - acc: 0.9425 - val_loss: 0.3245 - val_acc: 0.9068
+Epoch 4/15
+ - 0s - loss: 0.1612 - acc: 0.9576 - val_loss: 0.3041 - val_acc: 0.9188
+Epoch 5/15
+ - 0s - loss: 0.1353 - acc: 0.9634 - val_loss: 0.2882 - val_acc: 0.9208
+Epoch 6/15
+ - 0s - loss: 0.1120 - acc: 0.9697 - val_loss: 0.2838 - val_acc: 0.9233
+Epoch 7/15
+ - 0s - loss: 0.0954 - acc: 0.9748 - val_loss: 0.2785 - val_acc: 0.9233
+Epoch 8/15
+ - 0s - loss: 0.0812 - acc: 0.9775 - val_loss: 0.2653 - val_acc: 0.9312
+Epoch 9/15
+ - 0s - loss: 0.0665 - acc: 0.9829 - val_loss: 0.2730 - val_acc: 0.9283
+Epoch 10/15
+ - 0s - loss: 0.0532 - acc: 0.9852 - val_loss: 0.2565 - val_acc: 0.9387
+Epoch 11/15
+ - 0s - loss: 0.0439 - acc: 0.9894 - val_loss: 0.2575 - val_acc: 0.9382
+Epoch 12/15
+ - 0s - loss: 0.0413 - acc: 0.9893 - val_loss: 0.2635 - val_acc: 0.9367
+Epoch 13/15
+ - 0s - loss: 0.0319 - acc: 0.9930 - val_loss: 0.2529 - val_acc: 0.9397
+Epoch 14/15
+ - 0s - loss: 0.0261 - acc: 0.9944 - val_loss: 0.2618 - val_acc: 0.9392
+Epoch 15/15
+ - 0s - loss: 0.0226 - acc: 0.9959 - val_loss: 0.2663 - val_acc: 0.9382
+Test Run:  3
+
+Test loss: 0.26627766476655457
+Test accuracy: 0.9382162432677721
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_17 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_18 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_19 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_20 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.2484 - acc: 0.6435 - val_loss: 0.5611 - val_acc: 0.8460
+Epoch 2/15
+ - 0s - loss: 0.3182 - acc: 0.9170 - val_loss: 0.3765 - val_acc: 0.8994
+Epoch 3/15
+ - 0s - loss: 0.2067 - acc: 0.9436 - val_loss: 0.3293 - val_acc: 0.9123
+Epoch 4/15
+ - 0s - loss: 0.1627 - acc: 0.9571 - val_loss: 0.3042 - val_acc: 0.9163
+Epoch 5/15
+ - 0s - loss: 0.1344 - acc: 0.9639 - val_loss: 0.2866 - val_acc: 0.9243
+Epoch 6/15
+ - 0s - loss: 0.1122 - acc: 0.9687 - val_loss: 0.2867 - val_acc: 0.9228
+Epoch 7/15
+ - 0s - loss: 0.0915 - acc: 0.9763 - val_loss: 0.2702 - val_acc: 0.9302
+Epoch 8/15
+ - 0s - loss: 0.0817 - acc: 0.9781 - val_loss: 0.2607 - val_acc: 0.9337
+Epoch 9/15
+ - 0s - loss: 0.0678 - acc: 0.9819 - val_loss: 0.2495 - val_acc: 0.9322
+Epoch 10/15
+ - 0s - loss: 0.0553 - acc: 0.9867 - val_loss: 0.2547 - val_acc: 0.9317
+Epoch 11/15
+ - 0s - loss: 0.0464 - acc: 0.9877 - val_loss: 0.2537 - val_acc: 0.9377
+Epoch 12/15
+ - 0s - loss: 0.0376 - acc: 0.9915 - val_loss: 0.2471 - val_acc: 0.9387
+Epoch 13/15
+ - 0s - loss: 0.0321 - acc: 0.9922 - val_loss: 0.2563 - val_acc: 0.9387
+Epoch 14/15
+ - 0s - loss: 0.0284 - acc: 0.9936 - val_loss: 0.2724 - val_acc: 0.9357
+Epoch 15/15
+ - 0s - loss: 0.0209 - acc: 0.9963 - val_loss: 0.2593 - val_acc: 0.9417
+Test Run:  4
+
+Test loss: 0.2592655912999437
+Test accuracy: 0.9417040359932329
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_21 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_22 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_23 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_24 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.2599 - acc: 0.6476 - val_loss: 0.5943 - val_acc: 0.8396
+Epoch 2/15
+ - 0s - loss: 0.3373 - acc: 0.9103 - val_loss: 0.3728 - val_acc: 0.8929
+Epoch 3/15
+ - 0s - loss: 0.2113 - acc: 0.9410 - val_loss: 0.3326 - val_acc: 0.9008
+Epoch 4/15
+ - 0s - loss: 0.1605 - acc: 0.9569 - val_loss: 0.2944 - val_acc: 0.9203
+Epoch 5/15
+ - 0s - loss: 0.1308 - acc: 0.9652 - val_loss: 0.2867 - val_acc: 0.9198
+Epoch 6/15
+ - 0s - loss: 0.1077 - acc: 0.9712 - val_loss: 0.2821 - val_acc: 0.9268
+Epoch 7/15
+ - 0s - loss: 0.0910 - acc: 0.9753 - val_loss: 0.2856 - val_acc: 0.9228
+Epoch 8/15
+ - 0s - loss: 0.0762 - acc: 0.9792 - val_loss: 0.2792 - val_acc: 0.9287
+Epoch 9/15
+ - 0s - loss: 0.0643 - acc: 0.9829 - val_loss: 0.2675 - val_acc: 0.9302
+Epoch 10/15
+ - 0s - loss: 0.0516 - acc: 0.9857 - val_loss: 0.2675 - val_acc: 0.9302
+Epoch 11/15
+ - 0s - loss: 0.0449 - acc: 0.9881 - val_loss: 0.2693 - val_acc: 0.9372
+Epoch 12/15
+ - 0s - loss: 0.0398 - acc: 0.9901 - val_loss: 0.2826 - val_acc: 0.9312
+Epoch 13/15
+ - 0s - loss: 0.0329 - acc: 0.9930 - val_loss: 0.2633 - val_acc: 0.9367
+Epoch 14/15
+ - 0s - loss: 0.0247 - acc: 0.9948 - val_loss: 0.2673 - val_acc: 0.9372
+Epoch 15/15
+ - 0s - loss: 0.0221 - acc: 0.9967 - val_loss: 0.2693 - val_acc: 0.9397
+Test Run:  5
+
+Test loss: 0.26928353958540907
+Test accuracy: 0.9397110115786839
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_25 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_26 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_27 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_28 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.2449 - acc: 0.6439 - val_loss: 0.5579 - val_acc: 0.8495
+Epoch 2/15
+ - 0s - loss: 0.3114 - acc: 0.9173 - val_loss: 0.3707 - val_acc: 0.8999
+Epoch 3/15
+ - 0s - loss: 0.2013 - acc: 0.9436 - val_loss: 0.3202 - val_acc: 0.9103
+Epoch 4/15
+ - 0s - loss: 0.1606 - acc: 0.9553 - val_loss: 0.3017 - val_acc: 0.9158
+Epoch 5/15
+ - 0s - loss: 0.1337 - acc: 0.9649 - val_loss: 0.2836 - val_acc: 0.9233
+Epoch 6/15
+ - 0s - loss: 0.1106 - acc: 0.9697 - val_loss: 0.2795 - val_acc: 0.9263
+Epoch 7/15
+ - 0s - loss: 0.0943 - acc: 0.9733 - val_loss: 0.2656 - val_acc: 0.9292
+Epoch 8/15
+ - 0s - loss: 0.0768 - acc: 0.9794 - val_loss: 0.2650 - val_acc: 0.9337
+Epoch 9/15
+ - 0s - loss: 0.0667 - acc: 0.9820 - val_loss: 0.2609 - val_acc: 0.9372
+Epoch 10/15
+ - 0s - loss: 0.0554 - acc: 0.9866 - val_loss: 0.2587 - val_acc: 0.9357
+Epoch 11/15
+ - 0s - loss: 0.0481 - acc: 0.9864 - val_loss: 0.2597 - val_acc: 0.9362
+Epoch 12/15
+ - 0s - loss: 0.0386 - acc: 0.9900 - val_loss: 0.2580 - val_acc: 0.9362
+Epoch 13/15
+ - 0s - loss: 0.0341 - acc: 0.9918 - val_loss: 0.2651 - val_acc: 0.9392
+Epoch 14/15
+ - 0s - loss: 0.0265 - acc: 0.9940 - val_loss: 0.2679 - val_acc: 0.9362
+Epoch 15/15
+ - 0s - loss: 0.0231 - acc: 0.9949 - val_loss: 0.2668 - val_acc: 0.9372
+Test Run:  6
+
+Test loss: 0.26680301832555836
+Test accuracy: 0.9372197310604975
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_29 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_30 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_31 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_32 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.3010 - acc: 0.6453 - val_loss: 0.5755 - val_acc: 0.8555
+Epoch 2/15
+ - 0s - loss: 0.3201 - acc: 0.9232 - val_loss: 0.3715 - val_acc: 0.8969
+Epoch 3/15
+ - 0s - loss: 0.2042 - acc: 0.9453 - val_loss: 0.3366 - val_acc: 0.9083
+Epoch 4/15
+ - 0s - loss: 0.1635 - acc: 0.9550 - val_loss: 0.3045 - val_acc: 0.9118
+Epoch 5/15
+ - 0s - loss: 0.1349 - acc: 0.9643 - val_loss: 0.3046 - val_acc: 0.9163
+Epoch 6/15
+ - 0s - loss: 0.1123 - acc: 0.9709 - val_loss: 0.3006 - val_acc: 0.9248
+Epoch 7/15
+ - 0s - loss: 0.0940 - acc: 0.9759 - val_loss: 0.2647 - val_acc: 0.9263
+Epoch 8/15
+ - 0s - loss: 0.0811 - acc: 0.9779 - val_loss: 0.2694 - val_acc: 0.9297
+Epoch 9/15
+ - 0s - loss: 0.0673 - acc: 0.9840 - val_loss: 0.2673 - val_acc: 0.9327
+Epoch 10/15
+ - 0s - loss: 0.0572 - acc: 0.9871 - val_loss: 0.2626 - val_acc: 0.9322
+Epoch 11/15
+ - 0s - loss: 0.0474 - acc: 0.9881 - val_loss: 0.2734 - val_acc: 0.9332
+Epoch 12/15
+ - 0s - loss: 0.0405 - acc: 0.9904 - val_loss: 0.2560 - val_acc: 0.9352
+Epoch 13/15
+ - 0s - loss: 0.0341 - acc: 0.9930 - val_loss: 0.2681 - val_acc: 0.9347
+Epoch 14/15
+ - 0s - loss: 0.0267 - acc: 0.9948 - val_loss: 0.2717 - val_acc: 0.9367
+Epoch 15/15
+ - 0s - loss: 0.0218 - acc: 0.9963 - val_loss: 0.2793 - val_acc: 0.9377
+Test Run:  7
+
+Test loss: 0.2793160741735764
+Test accuracy: 0.9377179871641348
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_33 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_34 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_35 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_36 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.2911 - acc: 0.6394 - val_loss: 0.5891 - val_acc: 0.8435
+Epoch 2/15
+ - 0s - loss: 0.3342 - acc: 0.9124 - val_loss: 0.3714 - val_acc: 0.8939
+Epoch 3/15
+ - 0s - loss: 0.2101 - acc: 0.9431 - val_loss: 0.3291 - val_acc: 0.9038
+Epoch 4/15
+ - 0s - loss: 0.1690 - acc: 0.9545 - val_loss: 0.3116 - val_acc: 0.9148
+Epoch 5/15
+ - 0s - loss: 0.1379 - acc: 0.9624 - val_loss: 0.2862 - val_acc: 0.9243
+Epoch 6/15
+ - 0s - loss: 0.1155 - acc: 0.9682 - val_loss: 0.2770 - val_acc: 0.9263
+Epoch 7/15
+ - 0s - loss: 0.0934 - acc: 0.9754 - val_loss: 0.2715 - val_acc: 0.9302
+Epoch 8/15
+ - 0s - loss: 0.0791 - acc: 0.9790 - val_loss: 0.2683 - val_acc: 0.9273
+Epoch 9/15
+ - 0s - loss: 0.0657 - acc: 0.9830 - val_loss: 0.2692 - val_acc: 0.9297
+Epoch 10/15
+ - 0s - loss: 0.0541 - acc: 0.9882 - val_loss: 0.2560 - val_acc: 0.9367
+Epoch 11/15
+ - 0s - loss: 0.0456 - acc: 0.9892 - val_loss: 0.2570 - val_acc: 0.9367
+Epoch 12/15
+ - 0s - loss: 0.0387 - acc: 0.9912 - val_loss: 0.2662 - val_acc: 0.9342
+Epoch 13/15
+ - 0s - loss: 0.0319 - acc: 0.9938 - val_loss: 0.2802 - val_acc: 0.9312
+Epoch 14/15
+ - 0s - loss: 0.0280 - acc: 0.9949 - val_loss: 0.2688 - val_acc: 0.9357
+Epoch 15/15
+ - 0s - loss: 0.0233 - acc: 0.9959 - val_loss: 0.2754 - val_acc: 0.9372
+Test Run:  8
+
+Test loss: 0.27536068133189423
+Test accuracy: 0.9372197310604975
+
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_37 (Dense)             (None, 128)               32896     
+_________________________________________________________________
+dense_38 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_39 (Dense)             (None, 128)               16512     
+_________________________________________________________________
+dense_40 (Dense)             (None, 10)                1290      
+=================================================================
+Total params: 67,210
+Trainable params: 67,210
+Non-trainable params: 0
+_________________________________________________________________
+Train on 7291 samples, validate on 2007 samples
+Epoch 1/15
+ - 1s - loss: 1.3044 - acc: 0.6357 - val_loss: 0.5735 - val_acc: 0.8440
+Epoch 2/15
+ - 0s - loss: 0.3131 - acc: 0.9163 - val_loss: 0.3618 - val_acc: 0.8989
+Epoch 3/15
+ - 0s - loss: 0.2014 - acc: 0.9449 - val_loss: 0.3537 - val_acc: 0.8909
+Epoch 4/15
+ - 0s - loss: 0.1638 - acc: 0.9541 - val_loss: 0.3152 - val_acc: 0.9113
+Epoch 5/15
+ - 0s - loss: 0.1356 - acc: 0.9606 - val_loss: 0.3060 - val_acc: 0.9128
+Epoch 6/15
+ - 0s - loss: 0.1145 - acc: 0.9698 - val_loss: 0.2948 - val_acc: 0.9163
+Epoch 7/15
+ - 0s - loss: 0.0983 - acc: 0.9713 - val_loss: 0.2849 - val_acc: 0.9238
+Epoch 8/15
+ - 0s - loss: 0.0835 - acc: 0.9787 - val_loss: 0.2786 - val_acc: 0.9287
+Epoch 9/15
+ - 0s - loss: 0.0737 - acc: 0.9794 - val_loss: 0.2749 - val_acc: 0.9268
+Epoch 10/15
+ - 0s - loss: 0.0620 - acc: 0.9848 - val_loss: 0.2757 - val_acc: 0.9283
+Epoch 11/15
+ - 0s - loss: 0.0544 - acc: 0.9866 - val_loss: 0.2646 - val_acc: 0.9322
+Epoch 12/15
+ - 0s - loss: 0.0473 - acc: 0.9874 - val_loss: 0.2764 - val_acc: 0.9297
+Epoch 13/15
+ - 0s - loss: 0.0408 - acc: 0.9894 - val_loss: 0.2775 - val_acc: 0.9322
+Epoch 14/15
+ - 0s - loss: 0.0309 - acc: 0.9934 - val_loss: 0.2684 - val_acc: 0.9352
+Epoch 15/15
+ - 0s - loss: 0.0270 - acc: 0.9936 - val_loss: 0.2772 - val_acc: 0.9327
+Test Run:  9
+
+Test loss: 0.27715215431809365
+Test accuracy: 0.9327354261277622
+
+Loss Statistics
+count    10.000000
+mean      0.268925
+std       0.006360
+min       0.259266
+25%       0.265206
+50%       0.266570
+75%       0.273841
+max       0.279316
+dtype: float64
+
+Accuracy Statistics
+count    10.000000
+mean      0.938067
+std       0.002338
+min       0.932735
+25%       0.937344
+50%       0.937967
+75%       0.939462
+max       0.941704
+dtype: float64

@@ -122,7 +122,7 @@ def show_misclassified(test_set, model):
 
 	print (misclassified)
 
-def plot_results(history, epochs):
+def plot_results(history, epochs, name):
 	plt.style.use("ggplot")
 	plt.figure()
 	plt.plot(np.arange(0, epochs), history.history["loss"], label="train_loss")
@@ -133,4 +133,4 @@ def plot_results(history, epochs):
 	plt.xlabel("Epoch #")
 	plt.ylabel("Loss/Accuracy")
 	plt.legend(loc="upper left")
-	# plt.show()
+	plt.savefig(name)
