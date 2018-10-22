@@ -19,9 +19,9 @@ from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
 from TestTools import plot_results, load_data
-batch_size = 32
+batch_size = 128
 num_classes = 10
-epochs = 15
+epochs = 5
 
 # input image dimensions
 img_rows, img_cols = 16, 16
@@ -36,7 +36,7 @@ input_shape = (img_rows, img_cols, 1)
 loss_results = []
 accuracy_results = []
 
-for i in range(0,10):
+for i in range(0,1):
 
 	model = Sequential()
 	model.add(LocallyConnected2D(32, (3,3),
