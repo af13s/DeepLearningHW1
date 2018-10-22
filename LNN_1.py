@@ -42,9 +42,9 @@ for i in range(0,1):
 	model.add(LocallyConnected2D(32, (3,3),
 	                 activation='relu',
 	                 input_shape=input_shape))
-	model.add(LocallyConnected2D(64, (3,3), activation='tanh'))
+	model.add(LocallyConnected2D(64, (3,3), activation='sigmoid'))
 	model.add(Flatten())
-	model.add(Dense(128, activation='sigmoid'))
+	model.add(Dense(128, activation='tanh'))
 	model.add(Dense(num_classes, activation='softmax'))
 	model.compile(loss='categorical_crossentropy',
 	              optimizer=Adam(),
