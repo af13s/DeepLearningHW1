@@ -29,40 +29,70 @@ from TestTools import plot_results, show_misclassified, load_data
 
 batch_size = 128
 num_classes = 10
-epochs = 11
+epochs = 15
 
-# input image dimensions
-img_rows, img_cols = 16, 16
+loss_results = []
+accuracy_results = []
 
-x_train, y_train, x_test, y_test = load_data(img_rows, img_cols)
+for i in range(0,10):
 
-x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
-x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
-input_shape = (img_rows, img_cols, 1)
+	# input image dimensions
+	img_rows, img_cols = 16, 16
+
+	x_train, y_train, x_test, y_test = load_data(img_rows, img_cols)
+
+	x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
+	x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
+	input_shape = (img_rows, img_cols, 1)
 
 
-model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),
-                 activation='relu',
-                 input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='tanh'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(128, activation='sigmoid'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes, activation='softmax'))
+	model = Sequential()
+	model.add(Conv2D(32, kernel_size=(3, 3),
+	                 activation='relu',
+	                 input_shape=input_shape))
+	model.add(Conv2D(64, (3, 3), activation='tanh'))
+	model.add(MaxPooling2D(pool_size=(2, 2)))
+	model.add(Flatten())
+	model.add(Dense(128, activation='sigmoid'))
+	model.add(Dense(num_classes, activation='softmax'))
 
-model.compile(loss='categorical_crossentropy',
-              optimizer=Adam(lr=0.001),
-              metrics=['accuracy'])
+	# learning is very slow
+	# model.compile(loss='categorical_crossentropy',
+	#              optimizer=Adam(lr=0.00005),
+	#              metrics=['accuracy'])
 
-model.fit(x_train, y_train,
-          batch_size=batch_size,
-          epochs=epochs,
-          verbose=1,
-          validation_data=(x_test, y_test))
+	# learning is too fast
+	# model.compile(loss='categorical_crossentropy',
+	#               optimizer=Adam(lr=0.05),
+	#               metrics=['accuracy'])
 
-score = model.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+	# learning is effective
+	model.compile(loss='categorical_crossentropy',
+	             optimizer=Adam(lr=0.001),
+	             metrics=['accuracy'])
+
+	model.fit(x_train, y_train,
+	          batch_size=batch_size,
+	          epochs=epochs,
+	          verbose=2,
+	          validation_data=(x_test, y_test))
+
+	score = model.evaluate(x_test, y_test, verbose=0)
+	print("Test Run: " , i)
+	print()
+	print('Test loss:', score[0])
+	print('Test accuracy:', score[1])
+	print()
+	loss_results.append(score[0])
+	accuracy_results.append(score[1])
+
+	model = None
+
+loss_results = pd.Series(loss_results)
+accuracy_results = pd.Series(accuracy_results)
+
+print("Loss Statistics")
+print(loss_results.describe())
+print()
+print("Accuracy Statistics")
+print(accuracy_results.describe())

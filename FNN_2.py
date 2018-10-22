@@ -41,19 +41,19 @@ accuracy_results = []
 
 for i in range(0,10):
 	# # Parameter Intialization
-	# model = Sequential()
-	# model.add(Dense(128, activation='relu', bias_initializer=keras.initializers.Constant(value=0.01), input_shape=(256,)))
-	# model.add(Dense(128, bias_initializer=keras.initializers.Constant(value=6.7), activation='sigmoid'))
-	# model.add(Dense(128, bias_initializer=keras.initializers.Constant(value=6.7), activation='tanh'))
-
-
 	model = Sequential()
-	model.add(Dense(128, activation='relu', input_shape=(256,)))
-	#model.add(BatchNormalization())
-	model.add(Dense(128, activation='sigmoid'))
-	#model.add(BatchNormalization())
-	model.add(Dense(128, activation='tanh'))
-	#model.add(BatchNormalization())
+	model.add(Dense(128, activation='relu', bias_initializer=keras.initializers.Constant(value=0.01), input_shape=(256,)))
+	model.add(Dense(128, kernal_initializer=keras.initializers.Constant(value=4.58486), activation='sigmoid'))
+	model.add(Dense(128, kernel_initializer=keras.initializers.Constant(value=6.7), activation='tanh'))
+
+
+	# model = Sequential()
+	# model.add(Dense(128, activation='relu', input_shape=(256,)))
+	# #model.add(BatchNormalization())
+	# model.add(Dense(128, activation='sigmoid'))
+	# #model.add(BatchNormalization())
+	# model.add(Dense(128, activation='tanh'))
+	# #model.add(BatchNormalization())
 	model.add(Dense(num_classes, activation='softmax'))
 
 	model.summary()
@@ -77,9 +77,9 @@ for i in range(0,10):
 	#               metrics=['accuracy'])
 
 	# learning is effective
-	# model.compile(loss='categorical_crossentropy',
-	#              optimizer=Adam(lr=0.001),
-	#              metrics=['accuracy'])
+	model.compile(loss='categorical_crossentropy',
+	             optimizer=Adam(lr=0.001),
+	             metrics=['accuracy'])
 
 	# Momentum
 	# model.compile(loss='categorical_crossentropy',
@@ -91,7 +91,7 @@ for i in range(0,10):
 	history = model.fit(trainData, trainLabels,
 	                batch_size=batch_size,
 	                epochs=epochs,
-	                verbose=2,
+	                verbose=1,
 	                validation_data=(testData,testLabels))
 
 	score = model.evaluate(testData, testLabels, verbose=0)
