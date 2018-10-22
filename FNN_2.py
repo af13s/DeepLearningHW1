@@ -42,11 +42,16 @@ accuracy_results = []
 for i in range(0,10):
 	# # Parameter Intialization
 	model = Sequential()
+	
+	#fast
+	# model.add(Dense(128, activation='relu', input_shape=(256,),kernel_initializer=keras.initializers.Constant(value=5),bias_initializer=keras.initializers.Constant(value=0.001),)) # 
+	# model.add(Dense(128, activation='sigmoid',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
+	# model.add(Dense(128, activation='tanh',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
+
+	#slow parameter
 	model.add(Dense(128, activation='relu', input_shape=(256,),kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),)) # 
 	model.add(Dense(128, activation='sigmoid',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
 	model.add(Dense(128, activation='tanh',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
-	# model.add(Dense(128, activation='sigmoid', kernel_initializer=keras.initializers.Constant(value=4.58486),)) # 
-	# model.add(Dense(128, activation='tanh')) # , kernel_initializer=keras.initializers.Constant(value=2.99322)
 
 
 	# model = Sequential()
@@ -93,7 +98,7 @@ for i in range(0,10):
 	history = model.fit(trainData, trainLabels,
 	                batch_size=batch_size,
 	                epochs=epochs,
-	                verbose=1,
+	                verbose=2,
 	                validation_data=(testData,testLabels))
 
 	score = model.evaluate(testData, testLabels, verbose=0)
@@ -116,4 +121,4 @@ print()
 print("Accuracy Statistics")
 print(accuracy_results.describe())
 
-plot_results(history,epochs,'FNN_2.png')
+#plot_results(history,epochs,'FNN_2.png')
