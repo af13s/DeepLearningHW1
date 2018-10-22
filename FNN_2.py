@@ -49,18 +49,18 @@ for i in range(0,10):
 	# model.add(Dense(128, activation='tanh',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
 
 	#slow parameter
-	model.add(Dense(128, activation='relu', input_shape=(256,),kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),)) # 
-	model.add(Dense(128, activation='sigmoid',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
-	model.add(Dense(128, activation='tanh',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
+	# model.add(Dense(128, activation='relu', input_shape=(256,),kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),)) # 
+	# model.add(Dense(128, activation='sigmoid',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
+	# model.add(Dense(128, activation='tanh',kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001))) # kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
 
 
-	# model = Sequential()
-	# model.add(Dense(128, activation='relu', input_shape=(256,)))
-	# #model.add(BatchNormalization())
-	# model.add(Dense(128, activation='sigmoid'))
-	# #model.add(BatchNormalization())
-	# model.add(Dense(128, activation='tanh'))
-	# #model.add(BatchNormalization())
+	model = Sequential()
+	model.add(Dense(128, activation='relu', input_shape=(256,)))
+	#model.add(BatchNormalization())
+	model.add(Dense(128, activation='sigmoid'))
+	#model.add(BatchNormalization())
+	model.add(Dense(128, activation='tanh'))
+	#model.add(BatchNormalization())
 	model.add(Dense(num_classes, activation='softmax'))
 
 	model.summary()

@@ -49,12 +49,12 @@ for i in range(0,10):
 	model = Sequential()
 	model.add(Conv2D(32, kernel_size=(3, 3),
 	                 activation='relu',
-	                 kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001),
+	                 kernel_initializer=keras.initializers.Constant(value=0.0001),bias_initializer=keras.initializers.Constant(value=0.001),
 	                 input_shape=input_shape))
-	model.add(Conv2D(64, (3, 3), activation='tanh', kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001)))
+	model.add(Conv2D(64, (3, 3), activation='tanh', kernel_initializer=keras.initializers.Constant(value=0.0001),bias_initializer=keras.initializers.Constant(value=0.0005)))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 	model.add(Flatten())
-	model.add(Dense(128, activation='sigmoid', kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.001)))
+	model.add(Dense(128, activation='sigmoid', kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.0005)))
 	model.add(Dense(num_classes, activation='softmax'))
 
 	# learning is very slow
