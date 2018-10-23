@@ -1,0 +1,12 @@
+https://forums.fast.ai/t/batch-normalization-with-a-large-batch-size-breaks-validation-accuracy/7940
+
+
+# batch normalization
+
+https://github.com/matterport/Mask_RCNN/issues/236
+
+https://www.quora.com/Is-batch-normalization-still-effective-in-batch-sizes-of-8-16-in-CNNs-Could-%E2%80%9Cmoving-average%E2%80%9D-help
+
+https://www.graphcore.ai/posts/revisiting-small-batch-training-for-deep-neural-networks
+
+https://stats.stackexchange.com/questions/164876/tradeoff-batch-size-vs-number-of-iterations-to-train-a-neural-network

@@ -1,0 +1,6 @@
+solve for e^(-x)/(1+e^(-x))^2 = .01 //derivative of sinh x=value=4.58486
+
+solved for sech^2(x) = 0.01	// derivative of tanh x≈2.99322
+
+
+relu derivative x=0.01
