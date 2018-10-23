@@ -198,5 +198,6 @@ print("Ensemble Statistics")
 print(ensemble_results.describe())
 print("Individual Convolutional Statistics")
 print(cnn_accuracys.describe())
+plot_results()
 
 

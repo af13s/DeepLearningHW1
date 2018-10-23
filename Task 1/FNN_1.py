@@ -67,6 +67,7 @@ if __name__ == "__main__":
         print()
         print("Accuracy Statistics")
         print(accuracy_results.describe())
+        plot_results(history, 15, "FNN")
         '''
         classes = ['0','1','2','3','4','5','6','7','8','9']
         predictions = model.predict(testData).argmax(axis=-1)

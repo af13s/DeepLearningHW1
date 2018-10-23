@@ -1,12 +1,3 @@
-## https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
-
-'''Trains a simple convnet on the MNIST dataset.
-Gets to 99.25% test accuracy after 12 epochs
-(there is still a lot of margin for parameter tuning).
-16 seconds per epoch on a GRID K520 GPU.
-
-'''
-
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
@@ -49,12 +40,11 @@ for i in range(0,10):
 	model = Sequential()
 	model.add(Conv2D(32, kernel_size=(3, 3),
 	                 activation='relu',
-	                 kernel_initializer=keras.initializers.Constant(value=0.0001),bias_initializer=keras.initializers.Constant(value=0.001),
-	                 input_shape=input_shape))
-	model.add(Conv2D(64, (3, 3), activation='tanh', kernel_initializer=keras.initializers.Constant(value=0.0001),bias_initializer=keras.initializers.Constant(value=0.0005)))
+	                 input_shape=input_shape)) # kernel_initializer=keras.initializers.Constant(value=0.001)
+	model.add(Conv2D(64, (3, 3), activation='tanh', ))#kernel_initializer=keras.initializers.Constant(value=0.001)))
 	model.add(MaxPooling2D(pool_size=(2, 2)))
 	model.add(Flatten())
-	model.add(Dense(128, activation='sigmoid', kernel_initializer=keras.initializers.Constant(value=0.001),bias_initializer=keras.initializers.Constant(value=0.0005)))
+	model.add(Dense(128, activation='sigmoid',kernel_initializer=keras.initializers.Constant(value=.15205)))
 	model.add(Dense(num_classes, activation='softmax'))
 
 	# learning is very slow

@@ -29,7 +29,7 @@ if __name__ == "__main__":
         img_rows, img_cols = 16, 16
 
 
-        for i in range(0,10):
+        for i in range(0,1):
             trainData, trainLabels, testData, testLabels = load_data(img_rows, img_cols)
 
             batch_size = 128
@@ -38,8 +38,10 @@ if __name__ == "__main__":
 
             model = Sequential()
             model.add(Dense(128, activation='relu', input_shape=(256,), kernel_regularizer=regularizers.l1(0.001)))
-            model.add(Dense(128, activation='sigmoid', kernel_regularizer=regularizers.l1(0.001)))
+            model.add(Dropout(.25))
             model.add(Dense(128, activation='tanh', kernel_regularizer=regularizers.l1(0.001)))
+            model.add(Dropout(.5))
+            model.add(Dense(128, activation='sigmoid', kernel_regularizer=regularizers.l1(0.001)))
             model.add(Dense(num_classes, activation='softmax'))
 
             model.summary()

@@ -1,5 +1,3 @@
-## https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
-
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
@@ -30,7 +28,7 @@ input_shape = (img_rows, img_cols, 1)
 loss_results = []
 accuracy_results = []
 
-for i in range(0,10):
+for i in range(0,1):
 
 	model = Sequential()
 	model.add(Conv2D(32, kernel_size=(3, 3),
@@ -45,7 +43,7 @@ for i in range(0,10):
 	              optimizer=Adam(),
 	              metrics=['accuracy'])
 
-	model.fit(x_train, y_train,
+	history = model.fit(x_train, y_train,
 	          batch_size=batch_size,
 	          epochs=epochs,
 	          verbose=1,
@@ -69,3 +67,5 @@ print(loss_results.describe())
 print()
 print("Accuracy Statistics")
 print(accuracy_results.describe())
+
+plot_results(history, 15, "CNN")

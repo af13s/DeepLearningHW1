@@ -129,7 +129,7 @@ def plot_results(history, epochs, name):
 	plt.plot(np.arange(0, epochs), history.history["val_loss"], label="val_loss")
 	plt.plot(np.arange(0, epochs), history.history["acc"], label="train_acc")
 	plt.plot(np.arange(0, epochs), history.history["val_acc"], label="val_acc")
-	plt.title("Training Loss and Accuracy")
+	plt.title(name)
 	plt.xlabel("Epoch #")
 	plt.ylabel("Loss/Accuracy")
 	plt.legend(loc="upper left")
