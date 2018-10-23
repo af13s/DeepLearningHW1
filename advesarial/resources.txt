@@ -1,0 +1,6 @@
+Most of code in advgen.py is taken from here:
+https://github.com/prabhant/synthesizing-robust-adversarial-examples
+
+Also used this for help:
+https://ml.berkeley.edu/blog/2018/01/10/adversarial-examples/
+https://github.com/dangeng/Simple_Adversarial_Examples
