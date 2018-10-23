@@ -28,7 +28,7 @@ import numpy as np
 from keras.optimizers import Adam
 from TestTools import plot_results, show_misclassified, load_data
 
-batch_size = 128
+batch_size = 32
 num_classes = 10
 epochs = 15
 img_rows, img_cols = 16, 16

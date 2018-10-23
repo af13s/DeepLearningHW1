@@ -21,12 +21,12 @@ if __name__ == "__main__":
         accuracy_results = []
         img_rows, img_cols = 16,16
 
-        for i in range(0,10):
+        for i in range(0,1):
             trainData, trainLabels, testData, testLabels = load_data(img_rows, img_cols)
 
-            batch_size = 128
+            batch_size = 1
             num_classes = 10
-            epochs = 20
+            epochs = 15
 
             model = Sequential()
             model.add(Dense(128, activation='relu', input_shape=(256,)))

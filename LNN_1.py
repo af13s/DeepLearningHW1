@@ -19,7 +19,7 @@ from sklearn.preprocessing import OneHotEncoder
 import numpy as np
 from keras.optimizers import Adam
 from TestTools import plot_results, load_data
-batch_size = 128
+batch_size = 32
 num_classes = 10
 epochs = 5
 
